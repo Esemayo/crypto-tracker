@@ -22,9 +22,12 @@ def main():
     if error:
         print(error)
     if change is not None:
-        print(f"The price of {crypto} at the moment is: {price} 24hr change is :{change:.2f} %")
+        print(f"The price of {crypto} at the moment is: {price:,.2f} 24hr change is :{change:.2f} %")
     else:
-        print(f"The price of {crypto} at the moment is: {price} 24hr change is :N/A")
-
+        print(f"The price of {crypto} at the moment is: {price:,.2f} 24hr change is :N/A")
 if __name__ == "__main__":
     main()
+    #main objective multi coin dashboard refactor
+    #side quest improve out put to show the coin price and change in a neat table 
+    #current status - operational
+    #

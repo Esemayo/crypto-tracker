@@ -1,5 +1,5 @@
 import requests
-def get_price(coin, currency):
+def get_price(coin, currency = "usd"):
     url = "https://api.coingecko.com/api/v3/simple/price"
     params = {
         "ids": coin,
@@ -16,18 +16,22 @@ def get_price(coin, currency):
     change = data[coin].get(f"{currency}_24h_change") 
     return price, change, None
 def main():
-    crypto = input('Name the crypto youd like to research? Ex bitcoin,ethereum:').strip().lower()
-    currency = input("Which currency would you like price to be calculated?").strip().lower()
-    price, change, error = get_price(crypto, currency)
-    if error:
-        print(error)
-    if change is not None:
-        print(f"The price of {crypto} at the moment is: {price:,.2f} 24hr change is :{change:.2f} %")
-    else:
-        print(f"The price of {crypto} at the moment is: {price:,.2f} 24hr change is :N/A")
+    coins = ["bitcoin", "bittensor", "kaspa"]
+    currency = "usd"
+    print(f'{'Coin':<12}{'Price (USD)':>14}{'24h Change':>12}')
+    print("-" * 36)
+    for coin in coins:
+        price, change, error = get_price(coin, currency)
+        if error:
+            print(error)   
+        else:
+            print(f'{coin.title():<12}${price:>12,.2f}{change:>+10.2f}%')
 if __name__ == "__main__":
     main()
     #main objective multi coin dashboard refactor
+    #side quest create a loop to get a lookup of Bittenor, Kaspa, Bitcoin(hint- for coin in results:)
+    #side quest we need to figure out how to expand the dictionary for the data of the new coins
+    #hint for dictionary instead of expasion- results[coin] = {"price": price, "change": change}
     #side quest improve out put to show the coin price and change in a neat table 
-    #current status - operational
-    #
+    #current status - 
+    
